@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  mysql:
+    image: mariadb:10.3
+    container_name: mariadb
+    volumes:
+      - container-volume:/var/lib/mysql
+      - ./src/db/secret_demon.sql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: security_challenge
+    ports:
+      - "3306:3306"
+    restart: always
+
+  website:
+    container_name: php72
+    build:
+      context: ./
+    volumes:
+      - ./src:/var/www/html
+    ports:
+      - 8000:80
+    depends_on:
+      - mysql
