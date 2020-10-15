@@ -18,3 +18,5 @@ The difference between the secure and the insecure versions of the website can b
 1. Setup a server with PHP and MySQL support.
 
 2. Run [db/security_challenge.sql](db/security_challenge.sql) to create the MySQL database with all the necessary data inserted into the tables. A database user that only is allowed to do ﻿⁠⁠⁠⁠`SELECT`﻿⁠⁠⁠⁠ queries is also created.
+
+sourced and edited from https://github.com/netlight/security-challenge
