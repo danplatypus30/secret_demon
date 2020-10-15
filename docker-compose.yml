@@ -24,3 +24,6 @@ services:
       - 8000:80
     depends_on:
       - mysql
+
+volumes:
+  container-volume:
