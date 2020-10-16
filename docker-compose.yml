@@ -2,17 +2,30 @@ version: '3'
 
 services:
   mysql:
-    image: mariadb:10.3
-    container_name: mariadb
+    # image: mariadb:10.3
+    # container_name: mariadb
+    # volumes:
+    #   - container-volume:/var/lib/mysql
+    #   - ./src/db/secret_demon.sql
+    # environment:
+    #   MYSQL_ROOT_PASSWORD: root
+    #   MYSQL_DATABASE: security_challenge
+    # ports:
+    #   - "3306:3306"
+    # restart: always
+    image: mysql:8.0
+    container_name: mysql-server-80
+    command: --default-authentication-plugin=mysql_native_password
+#        working_dir: /application
     volumes:
-      - container-volume:/var/lib/mysql
-      - ./src/db/secret_demon.sql
+      - .:/application
+      - ./src/db/secret_demon.sql:/docker-entrypoint-initdb.d/
+    restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: security_challenge
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=security_challenge
     ports:
       - "3306:3306"
-    restart: always
 
   website:
     container_name: php72
